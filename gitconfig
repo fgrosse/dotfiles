@@ -1,0 +1,14 @@
+[user]
+	email = friedrich.grosse@gmail.com
+	name = Friedrich Große
+[core]
+	editor = vim
+[alias]
+	st = status
+	ci = commit
+	br = branch
+	co = checkout
+	df = diff
+	lg = log -p
+	who = shortlog -s --
+
