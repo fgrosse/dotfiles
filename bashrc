@@ -100,9 +100,8 @@ function parse_git_branch {
 }
 export PS1='\u@\h \[\033[1;33m\]\w\[\033[0m\]$(parse_git_branch)$ '
 
-# Suport for omnetpp
-export TCL_LIBRARY=/usr/share/tcl8.5
-export PATH=$PATH:$HOME/Programs/omnetpp-4.2.2/bin
-
 source ~/.dotfiles/git-completion.sh
+
+# Include system specific settings (not under .dotfiles control)
+source ~/.bash_local
 
