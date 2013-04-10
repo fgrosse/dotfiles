@@ -22,5 +22,9 @@ echo "Setting up git.."
 rm -f ~/.gitconfig
 ln -s $DIR/gitconfig ~/.gitconfig
 
+echo "Setting up vim.."
+rm -f ~/.vimrc
+ln -s $DIR/vimrc ~/.vimrc
+
 echo "Dotfile setup has finished"
 
