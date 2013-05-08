@@ -6,8 +6,8 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 echo "Setting up .bashrc.."
 rm -f ~/.bashrc
 ln -s $DIR/bashrc ~/.bashrc
-rm -f ~/.bash_aliases
-ln -s $DIR/bash_aliases ~/.bash_aliases
+rm -f ~/.shell_aliases
+ln -s $DIR/shell_aliases ~/.shell_aliases
 rm -f ~/.bash_profile
 ln -s $DIR/bash_profile ~/.bash_profile
 
