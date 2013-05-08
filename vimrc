@@ -4,9 +4,6 @@
 " Show line numbers by default
 set number
 
-" Enable mouse support
-set mouse=a
-
 " Show where we are in the file (lower right corner)
 set ruler
 
