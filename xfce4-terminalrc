@@ -3,7 +3,7 @@ MiscAlwaysShowTabs=FALSE
 MiscBell=FALSE
 MiscBordersDefault=TRUE
 MiscCursorBlinks=TRUE
-MiscCursorShape=TERMINAL_CURSOR_SHAPE_BLOCK
+MiscCursorShape=TERMINAL_CURSOR_SHAPE_UNDERLINE
 MiscDefaultGeometry=80x24
 MiscInheritGeometry=FALSE
 MiscMenubarDefault=TRUE
@@ -19,5 +19,6 @@ ScrollingLines=8192
 BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
 BackgroundDarkness=0.850000
 ColorForeground=#aeaeb0b0aaaa
+ColorCursor=#aeaeb0b0aaaa
 FontName=Monospace 11
 
