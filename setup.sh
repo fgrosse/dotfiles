@@ -18,6 +18,13 @@ else
 	echo "Did not overwrite existing ~/.bash_local"
 fi
 
+# copy xfce4-terminal configuration (if it is installed)
+if [ -d ~/.config/xfce4/terminal/ ]; then
+	echo "Found xfce4-terminal config folder. Copying terminalrc.."
+	rm -f ~/.config/xfce4/terminal/terminalrc
+	ln -s $DIR/xfce4-terminalrc ~/.config/xfce4/terminal/terminalrc
+fi
+
 echo "Setting up git.."
 rm -f ~/.gitconfig
 ln -s $DIR/gitconfig ~/.gitconfig
