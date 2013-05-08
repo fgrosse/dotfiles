@@ -1,0 +1,31 @@
+# enable support of hooks
+autoload -U add-zsh-hook
+function reset_rprompt() {
+  RPROMPT=""
+}
+add-zsh-hook precmd reset_rprompt
+
+# change dir if input is no executable
+setopt autocd
+
+# init autocompletion
+autoload compinit && compinit
+
+# load completion files
+for compl_file ($DOTFILES/**/*.zshcompl) source $compl_file
+
+# source every alias file
+for alias_conf ($DOTFILES/**/alias.conf) source $alias_conf
+
+# source every zsh config file
+for conf_file ($DOTFILES/**/*.zsh) source $conf_file
+
+# warn if regex does not match anything
+setopt nomatch
+
+# no beep...
+unsetopt beep notify
+
+# source local config
+if [[ -e ~/.localrc ]] source ~/.localrc
+

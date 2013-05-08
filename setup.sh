@@ -3,13 +3,19 @@
 echo "Starting dotfiles setup"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-echo "Setting up .bashrc.."
+echo "Setting up bash.."
 rm -f ~/.bashrc
 ln -s $DIR/bashrc ~/.bashrc
-rm -f ~/.shell_aliases
-ln -s $DIR/shell_aliases ~/.shell_aliases
+rm -f ~/.alias.conf
+ln -s $DIR/alias.conf ~/.alias.conf
 rm -f ~/.bash_profile
 ln -s $DIR/bash_profile ~/.bash_profile
+
+echo "Setting up zsh.."
+rm -f ~/.zshenv
+ln -s $DIR/zsh/zshenv.symlink ~/.zshenv
+rm -f ~/.zshrc
+ln -s $DIR/zsh/zshrc.symlink ~/.zshrc
 
 if [ ! -f ~/.bash_local ]; then
 	echo "Created a new file '~/.bash_local'. You can put your system specific configurations (like alternative PATH) in there"

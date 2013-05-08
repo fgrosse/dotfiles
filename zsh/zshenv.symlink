@@ -1,0 +1,11 @@
+export DOTFILES=$HOME/.dotfiles
+
+# update path
+#for bin_dir ($DOTFILES/*/bin(/)) export PATH=$PATH:"$bin_dir"
+
+# source every env file
+#for env_conf ($DOTFILES/**/env.conf) source $env_conf
+
+# source local env
+if [[ -e ~/.localenv ]] source ~/.localenv
+

@@ -1,0 +1,21 @@
+# set order of completion operations
+zstyle ':completion:*' completer _expand _complete _correct _approximate
+
+# cycle with <TAB> through options
+zstyle ':completion:*' menu select
+
+# complete till first ambigious character
+setopt menu_complete
+
+# show error if nothing matches
+setopt nomatch
+
+# speak to us
+zstyle ':completion:*' verbose true
+
+# display the results in groups
+zstyle ':completion:*' format $'%{\e[36m%}[%d]%{\e[0m%}'
+
+# show results with multiple tags in each group
+zstyle ':completion:*' group-name ''
+
