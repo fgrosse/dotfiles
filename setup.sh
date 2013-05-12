@@ -1,28 +1,105 @@
-#! /bin/bash
+#!/bin/zsh
+# Usage: setup <symlinks | unlink>
+# This file is largely based on ystein/.files/dotfiles
+# https://raw.github.com/ystein/.files/master/dotfiles
 
-echo "Starting dotfiles setup"
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+RED="\033[31m"
+GREEN="\033[32m"
+YELLOW="\033[33m"
+NORM="\033[0m"
 
-echo "Setting up zsh.."
-rm -f ~/.zshenv
-ln -s $DIR/zsh/zshenv.symlink ~/.zshenv
-rm -f ~/.zshrc
-ln -s $DIR/zsh/zshrc.symlink ~/.zshrc
+# Ask user what to do if destination file exists.
+# $1: destination path
+# returns: choice in $answer, or unsets $answer if the choice was invalid
+askUser() {
+  location=$1
+  echo -n " [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all : "
+  read answer
+  echo -n "  "
+  echo $answer | grep -E '^(s|S|o|O|b|B)$' > /dev/null 2>&1
+  [ $? -ne 0 ] && unset answer
+}
 
-# copy xfce4-terminal configuration (if it is installed)
-if [ -d ~/.config/xfce4/terminal/ ]; then
-	echo "Found xfce4-terminal config folder. Copying terminalrc.."
-	rm -f ~/.config/xfce4/terminal/terminalrc
-	ln -s $DIR/xfce4-terminalrc ~/.config/xfce4/terminal/terminalrc
-fi
+# Create symlink and all parent directories.
+# $1: source path
+# $2: destination path
+createlink() {
+  mkdir --parents $(dirname "$2")
+  ln -s "$1" "$2"
+}
 
-echo "Setting up git.."
-rm -f ~/.gitconfig
-ln -s $DIR/gitconfig ~/.gitconfig
+skip() {
+  echo "${GREEN}Skipping..${NORM}"
+}
 
-echo "Setting up vim.."
-rm -f ~/.vimrc
-ln -s $DIR/vimrc ~/.vimrc
+# Rename the destination file and then create a symlink.
+# $1: source path
+# $2: destination path
+backup() {
+  echo "${GREEN}Creating backup ($2.bak)..${NORM}"
+  mv "$2"{,.bak}
+  createlink "$1" "$2"
+}
 
-echo "Dotfile setup has finished"
+# Remove destination file before creating a symlink.
+# $1: source path
+# $2: destination path
+overwrite() {
+  echo "${RED}Overwriting $2..${NORM}"
+  rm -rf "$2"
+  createlink "$1" "$2"
+}
 
+# Create symlinks for all dotfiles.
+createSymLinks() {
+  echo "Creating symlinks to .dotfiles.."
+  for link in $(find -name '*.symlink'); do
+    relpath=${link#./}
+    src=$(pwd)/$relpath
+    dest=$HOME/.${relpath#*/}
+    dest=${dest%.symlink}
+
+    echo "  ${dest/#$HOME/~} ${YELLOW}→${NORM} ${src/#$HOME/~}"
+
+    if [ -e "$dest" ]; then
+      echo -n "  File ${dest/#$HOME/~} already exists. "
+      if [ -z "$strategy" ]; then
+        # so far, the user has not chosen a global strategy
+        while [ -z $answer ]; do
+          askUser
+        done
+      fi
+      case "$strategy$answer" in
+        s|S)  skip ;;
+        o|O)  overwrite "$src" "$dest" ;;
+        b|B)  backup "$src" "$dest" ;;
+      esac
+
+      # set strategy according to user answer
+      echo "$answer" | grep -E '^(S|O|B)$' > /dev/null 2>&1
+      [ $? -eq 0 ] && strategy=$answer
+      unset answer
+    else
+      createlink "$src" "$dest"
+    fi
+  done
+  echo "Script finished. Have a nice day :)"
+}
+
+# Delete symlinks and restore backups if there are any.
+unlink() {
+  for link in `find -name '*.symlink'`; do
+      dest=$HOME/.${link#./*/}
+      dest=${dest%.symlink}
+      rm "$dest"
+      [[ -e "$dest.bak" ]] && mv "$dest"{.bak,}
+  done
+}
+
+scriptDir="$( cd "$(dirname "$0")" && pwd )"
+cd "$scriptDir"
+case "$1" in
+  symlinks) createSymLinks ;;
+  unlink) unlink ;;
+  *) echo "Missing parameter! Script usage: ./setup <symlinks | unlink>";;
+esac
