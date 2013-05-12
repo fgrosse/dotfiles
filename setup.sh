@@ -91,9 +91,16 @@ unlink() {
   for link in `find -name '*.symlink'`; do
       dest=$HOME/.${link#./*/}
       dest=${dest%.symlink}
-      rm "$dest"
-      [[ -e "$dest.bak" ]] && mv "$dest"{.bak,}
+      if [ -e "$dest" ]; then
+        echo "Removing $dest.."
+        rm "$dest"
+        if [ -e "$dest.bak" ]; then
+          echo "Restoring backup $dest.bak"
+          mv "$dest"{.bak,}
+        fi
+      fi
   done
+  return 0
 }
 
 scriptDir="$( cd "$(dirname "$0")" && pwd )"
