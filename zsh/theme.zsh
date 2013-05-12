@@ -16,6 +16,7 @@ function parse_git_branch {
 
 update_prompt() {
   local usr
+  local machine
   # show a different color for root
   if [ $UID -eq 0 ]; then
     usr="%B%{$fg[red]%}%n%{$reset_color%}%b"
@@ -26,7 +27,6 @@ update_prompt() {
   machine="%B%{$fg[white]%}%m%{$reset_color%}%b"
 
   PROMPT="%(?..%{$fg[red]%}[%?]%{$reset_color%} )$usr@$machine:%~$(parse_git_branch) %{$fg[white]%}%B➤%b %{$reset_color%}"
-  RPROMPT="[%B%*%b on %D]"
 }
 
 add-zsh-hook precmd update_prompt
