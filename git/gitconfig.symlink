@@ -1,24 +1,30 @@
-[user]
-	name  = Friedrich Große
-	email = friedrich.grosse@gmail.com
+[alias]
+        br = branch
+        ci = commit
+        co = checkout
+        df = diff
+        h = help
+        ig = ls-files --others --ignored --directory --exclude-standard
+        lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit
+        ls = ls-files
+        mg = merge --no-ff
+        pu = pull
+        st = status -s
+        sta = stash
+[branch]
+        autosetuprebase = always
 [core]
 	editor = vim
+        excludesfile = ~/.gitignore
 [color]
         ui = true
         branch = auto
         diff = auto
         status = auto
-[alias]
-        st = status
-        ci = commit
-        br = branch
-        co = checkout
-        df = diff
-        lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit
-        h = help
-        ls = ls-files
-        ig = ls-files --others --ignored --directory --exclude-standard
-[branch]
-        autosetuprebase = always
-        excludesfile = ~/.gitignore
+[user]
+	name  = Friedrich Große
+	email = friedrich.grosse@gmail.com
+[push]
+	default = upstream
 
+# vim: ft=gitconfig

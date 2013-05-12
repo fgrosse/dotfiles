@@ -1,0 +1,68 @@
+###############################################################################
+####################### global git ignore file ################################
+###############################################################################
+
+# general {{{
+*.bak
+# }}}
+
+# editors, IDEs & build tools {{{
+# vim
+*.swp
+*.vimsession
+*.vimview
+*.latexmain
+doc/tags*
+
+# eclipse
+.classpath
+.project
+.settings
+.pydevproject
+
+# maven
+target
+
+# ant
+build
+# }}}
+
+# programming languages {{{
+# tex
+*._aux
+*._log
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.snm
+*.synctex.gz
+*.tdo
+*.thm
+*.toc
+*.vrb
+fdb_latexmk
+texput.fls
+
+# C/C++
+*.o
+
+# haskell
+*.hi
+
+# python
+__pycache__
+*.pyc
+
+# java
+*.class
+# }}}
+
+# vim: foldmethod=marker
+
