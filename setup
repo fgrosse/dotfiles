@@ -61,7 +61,7 @@ createSymLinks() {
 
     echo "  ${dest/#$HOME/~} ${YELLOW}→${NORM} ${src/#$HOME/~}"
 
-    if [ -e "$dest" ]; then
+    if [ -e "$dest" -o -L "$dest" ]; then
       echo -n "  File ${dest/#$HOME/~} already exists. "
       if [ -z "$strategy" ]; then
         # so far, the user has not chosen a global strategy
