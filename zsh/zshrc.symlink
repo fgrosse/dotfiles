@@ -31,3 +31,7 @@ if [[ -e ~/.localrc ]] source ~/.localrc
 
 # set vim as standard editor (some applications like svn use this global variable)
 export EDITOR=vim
+
+# Add RVM to PATH for scripting
+PATH=$PATH:$HOME/.rvm/bin 
+
