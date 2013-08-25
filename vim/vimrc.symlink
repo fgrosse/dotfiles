@@ -39,3 +39,8 @@ set background=dark
 "  n... :  where to save the viminfo files
 set viminfo='10,\"100,:20,%,n~/.viminfo
 
+" Enable spaces instead of tabs
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
