@@ -6,7 +6,7 @@ This is a collection of my application and system settings that are stored in hi
 Installation
 ============
 
-Clone this repository into ~/.dotfiles and run ~/.dotfiles/setup.sh
+Clone this repository into ``~/.dotfiles`` and run ``~/.dotfiles/setup.sh symlinks`` or just ``make``
 
 ```
 $ cd ~
