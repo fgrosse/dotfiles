@@ -9,11 +9,13 @@
         pu = push
         st = status -s
         sta = stash
+
 [branch]
         autosetuprebase = always
 [core]
 	editor = vim
-        excludesfile = ~/.gitignore
+    excludesfile = ~/.gitignore
+
 [color]
         ui = true
         branch = auto
@@ -22,6 +24,7 @@
 [user]
 	name  = Friedrich Große
 	email = friedrich.grosse@gmail.com
+
 [push]
 	default = upstream
 
