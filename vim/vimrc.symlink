@@ -8,7 +8,7 @@ set number
 set ruler
 
 " Enable spell checking (default to english
-set spell spelllang=en_us
+" set spell spelllang=en_us
 
 " Nice shortcuts for my tabs
 map <C-1> 1gt
@@ -25,8 +25,11 @@ map <C-0> :tablast<CR>
 " Enable syntax highlighting by default
 syntax on
 
-" Enable spell checking with F5
+" Toggle spell checking with F5
 map <F5> :setlocal spell! spelllang=en_us<CR>i
+
+" Toggle highlight search with F3
+map <F3> :set hlsearch!<CR>
 
 " I usually have a dark background in my shell
 set background=dark
