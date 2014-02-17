@@ -10,8 +10,11 @@
         st = status -s
         sta = stash
 
+        # I got this from http://codingkilledthecat.wordpress.com/2012/04/27/git-stash-pop-considered-harmful/
+        save = !sh -c 'export PREV=$(git symbolic-ref HEAD|cut -d/ -f3-) && git checkout -b "$1" && git commit -am "$1" && git checkout "$PREV"'
 [branch]
         autosetuprebase = always
+
 [core]
 	editor = vim
     excludesfile = ~/.gitignore
@@ -21,6 +24,7 @@
         branch = auto
         diff = auto
         status = auto
+
 [user]
 	name  = Friedrich Große
 	email = friedrich.grosse@gmail.com
