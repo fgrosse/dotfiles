@@ -1,4 +1,4 @@
-all: git symlink
+all: git symlink rbenv
 
 git:
 	git submodule init
@@ -6,6 +6,10 @@ git:
 
 symlink:
 	@./setup symlinks
+
+rbenv:
+	git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+	git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 
 update: git
 	git submodule foreach 'git checkout master && git pull'
