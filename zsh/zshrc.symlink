@@ -33,6 +33,5 @@ if [[ -e ~/.localrc ]] source ~/.localrc
 export EDITOR=vim
 
 # settings for rbenv
-export PATH="$HOME/.rbenv/bin:$HOME/.phpenv/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
-eval "$(phpenv init -)"
