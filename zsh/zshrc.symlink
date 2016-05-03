@@ -42,19 +42,15 @@ source "$DOTFILES/antigen/antigen.zsh"
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
 
-# Bundles from the default repo (robbyrussell's oh-my-zsh).
-antigen bundle git
-antigen bundle pip
-antigen bundle command-not-found
-
-# Syntax highlighting bundle.
-antigen bundle zsh-users/zsh-syntax-highlighting
+# Bundles from https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins
+antigen bundle branch    # Displays the current Git or Mercurial branch fast.
+antigen bundle zerok/cdp # quick project directory change
+antigen bundle zsh-users/zsh-syntax-highlighting # Syntax highlighting in the shell
 
 # Load the theme.
-antigen theme robbyrussell
+# https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+antigen theme amuse
 
 # Tell antigen that you're done.
 antigen apply
 
-export PROJECT_DIRECTORIES=~/Workspace:$GOPATH/src/github.com/$USER
-antigen bundle zerok/cdp
