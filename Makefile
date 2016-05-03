@@ -1,4 +1,6 @@
-all: git symlink rbenv
+.PHONY: all git symlink update clean
+
+all: git symlink ~/.rbenv
 
 git:
 	git submodule init
@@ -7,7 +9,7 @@ git:
 symlink:
 	@./setup symlinks
 
-rbenv:
+~/.rbenv:
 	git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
 	git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 

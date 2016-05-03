@@ -35,3 +35,25 @@ export EDITOR=vim
 # settings for rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+# setup antigen
+source "$DOTFILES/antigen/antigen.zsh"
+
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
+
+# Bundles from https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins
+antigen bundle branch    # Displays the current Git or Mercurial branch fast.
+antigen bundle zerok/cdp # quick project directory change
+antigen bundle zsh-users/zsh-syntax-highlighting # Syntax highlighting in the shell
+antigen bundle docker # autocomplete options for all docker commands.
+antigen bundle golang
+antigen bundle symfony2 # not super useful but maybe extend later
+
+# Load the theme.
+# https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+antigen theme amuse
+
+# Tell antigen that you're done.
+antigen apply
+
