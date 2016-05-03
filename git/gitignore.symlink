@@ -13,6 +13,7 @@
 *.vimview
 *.latexmain
 doc/tags*
+.idea
 
 # eclipse
 .classpath
@@ -62,6 +63,10 @@ __pycache__
 
 # java
 *.class
+# }}}
+
+# golang
+*.coverprofile
 # }}}
 
 # vim: foldmethod=marker
