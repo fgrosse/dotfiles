@@ -51,8 +51,7 @@ antigen bundle golang
 antigen bundle symfony2 # not super useful but maybe extend later
 
 # Load the theme.
-# https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-antigen theme amuse
+antigen theme $DOTFILES/zsh/ amuse
 
 # Tell antigen that you're done.
 antigen apply
