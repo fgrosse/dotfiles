@@ -10,7 +10,10 @@ rbenv_version() {
 
 current_activity() {
   if type track &>/dev/null; then
-    track print "[ %{$fg_bold[white]%}{{ .Current.Name }}%{$reset_color%} | {{ .Current | duration }} ]"
+    name=`track print "{{ .Current.Name }}"`
+    if [ -n "$name" ]; then
+      track print "[ %{$fg_bold[white]%}{{ .Current.Name }}%{$reset_color%} | {{ .Current | duration }} ]"
+    fi
   fi
 }
 
