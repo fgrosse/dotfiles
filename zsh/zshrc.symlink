@@ -48,7 +48,8 @@ antigen bundle zerok/cdp # quick project directory change
 antigen bundle zsh-users/zsh-syntax-highlighting # Syntax highlighting in the shell
 antigen bundle docker # autocomplete options for all docker commands.
 antigen bundle golang
-antigen bundle symfony2 # not super useful but maybe extend later
+#antigen bundle symfony2 # not super useful but maybe extend later
+antigen bundle kubectl
 
 # Load the theme.
 antigen theme $DOTFILES/zsh/ amuse
