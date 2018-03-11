@@ -20,11 +20,12 @@ askUser() {
 }
 
 # Create symlink and all parent directories.
-# $1: source path
-# $2: destination path
+# $1: target path (destination)
+# $2: link path
 createlink() {
+  echo "  ${2/#$HOME/~} ${YELLOW}→${NORM} ${1/#$HOME/~}"
   mkdir --parents $(dirname "$2")
-  ln -s "$1" "$2"
+  ln -s -f "$1" "$2"
 }
 
 skip() {
@@ -58,8 +59,6 @@ createSymLinks() {
     dest=$HOME/.${relpath#*/}
     dest=${dest%.symlink}
 
-    echo "  ${dest/#$HOME/~} ${YELLOW}→${NORM} ${src/#$HOME/~}"
-
     if [ -e "$dest" -o -L "$dest" ]; then
       echo -n "  File ${dest/#$HOME/~} already exists. "
       if [ -z "$strategy" ]; then
@@ -85,6 +84,10 @@ createSymLinks() {
       createlink "$src" "$dest"
     fi
   done
+
+  # Custome symlinks
+  createlink "$(realpath terminator-config)" "$HOME/.config/terminator/config"
+
   echo "Script finished. Have a nice day :)"
 }
 
