@@ -18,8 +18,13 @@ current_activity() {
   fi
 }
 
+host=$HOST
+if [ -n "$host" ]; then
+  host="%{$fg_bold[yellow]%}$host%{$reset_color%} "
+fi
+
 PROMPT='
-%{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}$(git_prompt_info) ⌚ %{$fg_bold[red]%}%*%{$reset_color%} $(current_activity)
+$host%{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}$(git_prompt_info) ⌚ %{$fg_bold[red]%}%*%{$reset_color%} $(current_activity)
 $ '
 
 # Must use Powerline font, for \uE0A0 to render.
