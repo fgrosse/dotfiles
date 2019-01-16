@@ -1,0 +1,118 @@
+# enable support of hooks
+autoload -U add-zsh-hook
+function reset_rprompt() {
+  RPROMPT=""
+}
+add-zsh-hook precmd reset_rprompt
+
+# change dir if input is no executable
+setopt autocd
+
+# init autocompletion
+autoload compinit && compinit
+
+# set order of completion operations
+zstyle ':completion:*' completer _expand _complete _correct _approximate
+
+# cycle with <TAB> through options
+zstyle ':completion:*' menu select
+
+# complete till first ambigious character
+setopt menu_complete
+
+# show error if nothing matches
+setopt nomatch
+
+# speak to us
+zstyle ':completion:*' verbose true
+
+# display the results in groups
+zstyle ':completion:*' format $'%{\e[36m%}[%d]%{\e[0m%}'
+
+# show results with multiple tags in each group
+zstyle ':completion:*' group-name ''
+
+# save each command immediately in the history file
+setopt inc_append_history
+
+# share history file between multiple zsh shells
+setopt share_history
+
+# ignore duplicates in the history
+setopt hist_ignore_all_dups
+
+# use pushd instead of cd
+setopt autopushd
+
+# ignore duplicates in the directory history
+setopt pushdignoredups
+
+# print no message
+setopt pushdsilent
+
+# invert meaning of + and - (highest element in the stack hast highest order)
+setopt pushdminus
+
+# push directories relative to home dir
+setopt pushdtohome
+
+# treat parts of an path as different words
+# influences the behaviour of e.g. CTRL-W
+autoload -U select-word-style
+select-word-style bash
+
+# warn if regex does not match anything
+setopt nomatch
+
+# no beep...
+unsetopt beep notify
+
+# Setup antigen (plugin manager for zsh)
+# https://github.com/zsh-users/antigen
+if [[ -d "$HOME/.local/share/chezmoi/antigen" ]]; then
+    source "$HOME/.local/share/chezmoi/antigen/antigen.zsh"
+
+    # Load the oh-my-zsh's library.
+    antigen use oh-my-zsh
+
+    # Bundles from https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins
+    antigen bundle branch    # Displays the current Git or Mercurial branch fast.
+    antigen bundle zerok/cdp # quick project directory change
+    antigen bundle zsh-users/zsh-syntax-highlighting # Syntax highlighting in the shell
+    antigen bundle docker # autocomplete options for all docker commands.
+    antigen bundle golang # autocompletion for go
+    antigen bundle httpie # auto completion for httpie
+    antigen bundle gpg-agent
+    antigen bundle kubectl
+
+    # Load the theme.
+    antigen theme "$HOME/.local/share/chezmoi/theme/" fgrosse
+
+    # Tell antigen that you're done.
+    antigen apply
+fi
+
+# Define my aliases
+alias please='sudo'
+alias gpu='git pu'
+alias ts='tig status'
+alias coma='git commit --amend'
+alias l='ls -l'
+alias ll='l -L'
+alias la='l -a'
+
+# Some default flags configured via aliases
+alias grep='grep --color'
+alias ls='ls --color -h'
+
+# A function to allow traversing up the file system using multiple dots (e.g. ....)
+cd() {
+  if [[ "$1" =~ ^\\.{1,}$ ]]; then
+    for (( i=0; i<$(( ${#1} - 1 )); i++ )); do
+      builtin cd ..
+    done
+  else
+    builtin cd "$@"
+  fi
+}
+

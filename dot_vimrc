@@ -1,0 +1,83 @@
+" My Vimrc file
+" See: http://vimdoc.sourceforge.net/htmldoc/options.html for details
+
+set nocompatible
+filetype off
+
+" The following lines assume Vundle was already checked out ~~~
+" See https://github.com/VundleVim/Vundle.vim for instructions
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle
+Plugin 'VundleVim/Vundle.vim'
+
+" add all plugins (alphabetical order for better maintenance)
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+
+" All of your Plugins must be added before the following line
+call vundle#end()
+filetype plugin indent on
+
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+
+" ~~~~~~~~~ End of Vundle specific setup ~~~~~~~~~~~~~~~~~~~~~~
+
+" Show line numbers by default
+set number
+
+" Show where we are in the file (lower right corner)
+set ruler
+
+" Enable spell checking (default to english
+" set spell spelllang=en_us
+
+" Nice shortcuts for my tabs
+map <C-1> 1gt
+map <C-2> 2gt
+map <C-3> 3gt
+map <C-4> 4gt
+map <C-5> 5gt
+map <C-6> 6gt
+map <C-7> 7gt
+map <C-8> 8gt
+map <C-9> 9gt
+map <C-0> :tablast<CR>
+
+" Enable syntax highlighting by default
+syntax on
+
+" Toggle spell checking with F5
+map <F5> :setlocal spell! spelllang=en_us<CR>i
+
+" Toggle highlight search with F3
+map <F3> :set hlsearch!<CR>
+
+" I usually have a dark background in my shell
+set background=dark
+
+" Tell vim to remember certain things when we exit
+"  '10  :  marks will be remembered for up to 10 previously edited files
+"  "100 :  will save up to 100 lines for each register
+"  :20  :  up to 20 lines of command-line history will be remembered
+"  %    :  saves and restores the buffer list
+"  n... :  where to save the viminfo files
+set viminfo='10,\"100,:20,%,n~/.viminfo
+
+" Enable spaces instead of tabs
+set tabstop=4
+set shiftwidth=4
+set expandtab
+

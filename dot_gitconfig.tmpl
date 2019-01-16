@@ -1,0 +1,47 @@
+[alias]
+    br = branch
+    co = checkout
+    df = diff
+    h = help
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit
+    ls = ls-files
+    mg = merge --no-ff
+    pu = push
+    st = status -s
+    sta = stash
+
+    # I got this from http://codingkilledthecat.wordpress.com/2012/04/27/git-stash-pop-considered-harmful/
+    save = !sh -c 'export PREV=$(git symbolic-ref HEAD|cut -d/ -f3-) && git checkout -b "$1" && git commit -am "$1" && git checkout "$PREV"'
+
+[branch]
+    autosetuprebase = always
+
+[core]
+	editor = vim
+    excludesfile = ~/.gitignore
+
+[color]
+    ui = true
+    branch = auto
+    diff = auto
+    status = auto
+
+[user]
+	name  = {{ if (index . "name") }}{{ .name }}{{ else }}Friedrich Große{{ end }}
+	email = {{ if (index . "email") }}{{ .email }}{{ else }}friedrich.grosse@gmail.com{{ end }}
+	{{- if (index . "signingkey") }}
+	signingkey = {{ .signingkey }}
+
+[gpg]
+    program = /usr/bin/gpg2
+{{- end }}
+
+[push]
+	default = upstream
+
+# vim: ft=gitconfig
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
