@@ -52,6 +52,6 @@ print_step "# Initializing dotfiles from $REPO"
 echo "chezmoi init --apply \"$REPO\""
 chezmoi init --apply "$REPO"
 
-print_step "Dotfiles setup successfully"
+print_step "Dotfiles setup successful"
 echo "Happy hacking! \ʕ◔ϖ◔ʔ/"
 echo
