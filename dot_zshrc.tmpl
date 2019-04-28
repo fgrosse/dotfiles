@@ -93,12 +93,7 @@ if [[ -d "$HOME/.local/share/chezmoi/antigen" ]]; then
 fi
 
 # direnv
-which direnv >/dev/null && eval "$(direnv hook zsh)"
-
-# Standard environment variables
-export EDITOR=vim
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
+type direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
 
 # Define my aliases
 alias please='sudo'
