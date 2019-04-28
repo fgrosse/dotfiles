@@ -7,4 +7,4 @@ WORKDIR /root
 ADD setup.sh /root
 RUN chmod u+x /root/setup.sh
 
-CMD /root/setup.sh
+CMD /root/setup.sh && chezmoi verify && chezmoi data
