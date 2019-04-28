@@ -17,7 +17,7 @@
     autosetuprebase = always
 
 [core]
-	editor = vim
+    editor = vim
     excludesfile = ~/.gitignore
 
 [color]
@@ -27,21 +27,28 @@
     status = auto
 
 [user]
-	name  = {{ if (index . "name") }}{{ .name }}{{ else }}Friedrich Große{{ end }}
-	email = {{ if (index . "email") }}{{ .email }}{{ else }}friedrich.grosse@gmail.com{{ end }}
-	{{- if (index . "signingkey") }}
-	signingkey = {{ .signingkey }}
+    name  = {{ if (index . "name") }}{{ .name }}{{ else }}Friedrich Große{{ end }}
+    email = {{ if (index . "email") }}{{ .email }}{{ else }}friedrich.grosse@gmail.com{{ end }}
+    {{- if (index . "signingkey") }}
+    signingkey = {{ .signingkey }}
 
 [gpg]
     program = /usr/bin/gpg2
 {{- end }}
 
 [push]
-	default = upstream
+    default = upstream
+
+[pager]
+    branch = false
+    grep = false
+
+[fetch]
+    prune = true
 
 # vim: ft=gitconfig
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
