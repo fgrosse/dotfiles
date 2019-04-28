@@ -4,7 +4,7 @@ set -e -o pipefail
 
 type git >/dev/null 2>&1 || { echo >&2 'ERROR: Script requires "git" binary to fetch the dotfiles repository.'; exit 1; }
 
-REPO='https://github.com/fgrosse/dotfiles.git'
+REPO='git@github.com:fgrosse/dotfiles.git'
 CHEZMOI_VERSION='1.4.2'
 CHEZMOI_SHA256_HASH='89276df937a7ce95e6647f285007fceba784a9a94efd12d4cb057f0b99c649cb'
 
