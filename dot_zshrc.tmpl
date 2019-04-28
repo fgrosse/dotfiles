@@ -92,6 +92,14 @@ if [[ -d "$HOME/.local/share/chezmoi/antigen" ]]; then
     antigen apply
 fi
 
+# direnv
+which direnv >/dev/null && eval "$(direnv hook zsh)"
+
+# Standard environment variables
+export EDITOR=vim
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 # Define my aliases
 alias please='sudo'
 alias gpu='git pu'
@@ -116,3 +124,9 @@ cd() {
   fi
 }
 
+# Find and delete merged branches in a git repository.
+git-delete-merged-branches() {
+    git branch --merged | \
+    grep -v master | \
+    xargs git branch -d
+}
