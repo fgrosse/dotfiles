@@ -1,6 +1,6 @@
 FROM ubuntu
 
-RUN apt-get update && apt-get install -y git wget vim zsh
+RUN apt-get update && apt-get install -y git wget vim zsh make
 
 WORKDIR /root
 

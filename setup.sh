@@ -3,6 +3,7 @@
 set -e -o pipefail
 
 type git >/dev/null 2>&1 || { echo >&2 'ERROR: Script requires "git" binary to fetch the dotfiles repository.'; exit 1; }
+type make >/dev/null 2>&1 || { echo >&2 'ERROR: Script requires "make" binary to perform post setup steps.'; exit 1; }
 
 REPO='https://github.com/fgrosse/dotfiles.git'
 CHEZMOI_VERSION='1.4.2'
@@ -57,7 +58,7 @@ chezmoi cd
 
 # TODO: we need to make sure antibody is installed first
 echo "Downloading antibody bundles (zsh package manager)"
-make plugins # TODO: is make installed?
+make plugins
 
 echo "Installing fzf (a command-line fuzzy finder)"
 ./fzf/install" --bin
