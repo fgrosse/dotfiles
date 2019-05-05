@@ -1,4 +1,6 @@
-.PHONY: setup test debug test-build plugins
+SHELL = /bin/zsh
+
+.PHONY: setup test debug test-build plugins update-zsh-completions
 
 define ZSH_PLUGINS_FILE_HEADER
 #!/usr/bin/env zsh
@@ -26,3 +28,8 @@ plugins:
 	echo -e "$$ZSH_PLUGINS_FILE_HEADER" > dot_zsh_plugins.sh
 	antibody bundle < zsh_plugins.txt  >> dot_zsh_plugins.sh
 	chezmoi apply
+
+update-zsh-completions:
+	http https://raw.githubusercontent.com/zsh-users/zsh-completions/master/src/_golang > completions/_go
+	kubectl completion zsh > completions/_kubectl
+	rm -f ~/.zcompdump

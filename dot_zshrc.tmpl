@@ -8,9 +8,6 @@ add-zsh-hook precmd reset_rprompt
 # change dir if input is no executable
 setopt autocd
 
-# init autocompletion
-autoload compinit && compinit
-
 # set order of completion operations
 zstyle ':completion:*' completer _expand _complete _correct _approximate
 
@@ -71,10 +68,11 @@ unsetopt beep notify
 # https://github.com/getantibody/antibody
 source "$HOME/.zsh_plugins.sh"
 
-# enable kubectl auto completion
-if [[ -x "$(which kubectl 2> /dev/null)" ]]; then
-    source <(kubectl completion zsh)
-fi
+# Load my own completions
+fpath+=( "/home/fgrosse/.local/share/chezmoi/completions" )
+
+# init autocompletion
+autoload compinit && compinit
 
 # enable direnv hook
 if [[ -x "$(which direnv 2> /dev/null)" ]]; then
@@ -90,8 +88,8 @@ alias please='sudo'
 alias gpu='git pu'
 alias ts='tig status'
 alias coma='git commit --amend'
-alias ll='l -L'
-alias la='l -a'
+alias ll='ls -lL'
+alias la='ls -la'
 alias kc=kubectl
 alias gpg=gpg2
 
