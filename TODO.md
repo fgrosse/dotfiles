@@ -6,6 +6,7 @@
     - jq
     - bat
     - direnv
+    - kubectx/kubens
     
 - set zsh as standard shell
 - direnv
