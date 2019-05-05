@@ -1,6 +1,7 @@
-README.md
 antigen
+Makefile
+README.md
+setup.sh
 test
 theme
-setup.sh
-Makefile
+zsh_plugins.txt

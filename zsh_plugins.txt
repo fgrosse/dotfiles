@@ -1,0 +1,15 @@
+# This file is used by antibody (https://github.com/getantibody/antibody).
+# Look at the README.md to understand how bundles are loaded and how to add new bundles.
+
+# My own bundles/forks and a custom theme
+fgrosse/cdp # quick project directory change
+robbyrussell/oh-my-zsh path:lib/theme-and-appearance.zsh # load generally useful functions to build theme
+robbyrussell/oh-my-zsh path:lib/git.zsh                  # git related functions to build the prompt
+/home/fgrosse/.local/share/chezmoi/theme fgrosse
+
+# oh-my-zsh plugins from https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins
+robbyrussell/oh-my-zsh path:plugins/docker kind:fpath # autocomplete options for all docker commands
+robbyrussell/oh-my-zsh path:plugins/httpie kind:fpath # auto completion for httpie
+
+zsh-users/zsh-autosuggestions     # Fish like suggestions
+zsh-users/zsh-syntax-highlighting # Syntax highlighting in the shell

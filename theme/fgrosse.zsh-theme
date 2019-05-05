@@ -1,7 +1,9 @@
+#!/usr/bin/env zsh
+
 current_activity() {
-  if type track &>/dev/null; then
-    name=`track print "{{ .Current.Name }}"`
-    if [ -n "$name" ]; then
+  if [[ -x "$(which track &> /dev/null)" ]]; then
+    name=$(track print "{{ .Current.Name }}")
+    if [[ -n "$name" ]]; then
       track print "[ %{$fg_bold[white]%}{{ .Current.Name }}%{$reset_color%} | {{ .Current | duration }} ]"
     fi
   fi
