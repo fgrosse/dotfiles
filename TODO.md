@@ -5,6 +5,7 @@
     - antigen
     - jq
     - bat
+    - fzf
     - direnv
     - kubectx/kubens
     

@@ -52,6 +52,9 @@ print_step "# Initializing dotfiles from $REPO"
 echo "chezmoi init --apply \"$REPO\""
 chezmoi init --apply "$REPO"
 
+echo "Installing fzf (a command-line fuzzy finder)"
+./fzf/install --bin
+
 print_step "Dotfiles setup successful"
 echo "Happy hacking! \ʕ◔ϖ◔ʔ/"
 echo

@@ -1,4 +1,5 @@
 completions
+fzf
 Makefile
 README.md
 setup.sh
