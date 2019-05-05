@@ -52,8 +52,15 @@ print_step "# Initializing dotfiles from $REPO"
 echo "chezmoi init --apply \"$REPO\""
 chezmoi init --apply "$REPO"
 
+# The rest of the setup script is executed from within the chezmoi dotfiles directory.
+chezmoi cd
+
+# TODO: we need to make sure antibody is installed first
+echo "Downloading antibody bundles (zsh package manager)"
+make plugins # TODO: is make installed?
+
 echo "Installing fzf (a command-line fuzzy finder)"
-./fzf/install --bin
+./fzf/install" --bin
 
 print_step "Dotfiles setup successful"
 echo "Happy hacking! \ʕ◔ϖ◔ʔ/"

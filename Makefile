@@ -16,7 +16,7 @@ test: test-build
 	docker run -it --rm chezmoi-test
 
 debug: test-build
-	docker run -it --rm chezmoi-test bash
+	docker run -it --rm chezmoi-test zsh
 
 test-build:
 	docker build -t chezmoi-test -f ./test/Dockerfile .
@@ -25,9 +25,8 @@ setup:
 	./setup.sh
 
 plugins:
-	echo -e "$$ZSH_PLUGINS_FILE_HEADER" > dot_zsh_plugins.sh
-	antibody bundle < zsh_plugins.txt  >> dot_zsh_plugins.sh
-	chezmoi apply
+	echo -e "$$ZSH_PLUGINS_FILE_HEADER" > "$$HOME/.zsh_plugins.sh"
+	antibody bundle < zsh_plugins.txt  >> "$$HOME/.zsh_plugins.sh"
 
 update-zsh-completions:
 	http https://raw.githubusercontent.com/zsh-users/zsh-completions/master/src/_golang > completions/_go
