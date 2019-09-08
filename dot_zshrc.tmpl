@@ -29,6 +29,9 @@ zstyle ':completion:*' format $'%{\e[36m%}[%d]%{\e[0m%}'
 # show results with multiple tags in each group
 zstyle ':completion:*' group-name ''
 
+# init autocompletion
+autoload compinit && compinit
+
 # save each command immediately in the history file
 setopt inc_append_history
 
@@ -70,9 +73,6 @@ source "$HOME/.zsh_plugins.sh"
 
 # Load my own completions
 fpath+=( "$HOME/.local/share/chezmoi/completions" )
-
-# init autocompletion
-autoload compinit && compinit
 
 # enable direnv hook
 if [[ -x "$(which direnv 2> /dev/null)" ]]; then
