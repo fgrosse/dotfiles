@@ -8,7 +8,7 @@ robbyrussell/oh-my-zsh path:lib
 /home/fgrosse/.local/share/chezmoi/theme fgrosse
 
 # My own plugins
-fgrosse/cdp      # quick project directory change (fork)
+zerok/cdp      # quick project directory change
 
 # oh my zsh plugins from https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins
 robbyrussell/oh-my-zsh path:plugins/docker kind:fpath
