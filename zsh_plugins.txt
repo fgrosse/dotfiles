@@ -17,3 +17,6 @@ robbyrussell/oh-my-zsh path:plugins/httpie kind:fpath
 zsh-users/zsh-autosuggestions                 # Fish like suggestions
 zsh-users/zsh-syntax-highlighting             # Syntax highlighting in the shell
 zsh-users/zsh-completions path:src kind:fpath
+
+# Auto completions for Go buffalo
+1995parham/buffalo.zsh
