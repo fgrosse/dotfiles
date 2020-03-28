@@ -5,7 +5,7 @@
 robbyrussell/oh-my-zsh path:lib
 
 # My custom theme
-/home/fgrosse/.local/share/chezmoi/theme fgrosse
+~/.local/share/chezmoi/theme fgrosse
 
 # My own plugins
 zerok/cdp      # quick project directory change
