@@ -32,3 +32,7 @@ update-zsh-completions:
 	http https://raw.githubusercontent.com/zsh-users/zsh-completions/master/src/_golang > completions/_go
 	kubectl completion zsh > completions/_kubectl
 	rm -f ~/.zcompdump
+
+.PHONY: git-set-url
+git-set-url:
+	git remote set-url origin git@github.com:fgrosse/dotfiles.git
