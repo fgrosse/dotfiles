@@ -106,7 +106,11 @@ if [[ -x "$(which tldr 2> /dev/null)" ]]; then
 fi
 
 if [[ -x "$(which fzf 2> /dev/null)" ]]; then
+    # Extra zfz key bindings
     source "$HOME/.local/share/chezmoi/fzf/shell/key-bindings.zsh"
+
+    # Use fzf in auto-completion
+    [[ $- == *i* ]] && source "$HOME/.local/share/chezmoi/fzf/shell/completion.zsh" 2> /dev/null
 fi
 
 if [[ -x "$(which broot 2> /dev/null)" ]]; then
