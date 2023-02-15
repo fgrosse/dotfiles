@@ -150,3 +150,16 @@ git-delete-merged-branches() {
     grep -v -E '(master|develop)' \
     xargs git branch -d
 }
+
+pods() {
+    if [ "$#" -eq 1 ]; then
+        watch "kubectl -n $1 get pods"
+    else
+        watch "kubectl get pods"
+    fi
+}
+
+nodes() {
+    watch "kubectl get nodes"
+}
+
