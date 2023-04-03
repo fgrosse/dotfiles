@@ -19,3 +19,6 @@ zsh-users/zsh-completions path:src kind:fpath
 
 # Auto completions for Go buffalo
 1995parham/buffalo.zsh
+
+# kubectx & kubens autocompletion
+ahmetb/kubectx path:completion kind:fpath
