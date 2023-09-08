@@ -94,6 +94,11 @@ if [[ -x "$(which tldr 2> /dev/null)" ]]; then
     alias help=tldr
 fi
 
+# https://github.com/bugaevc/wl-clipboard
+if [[ -x "$(which wl-copy 2> /dev/null)" ]]; then
+    alias clipboard=wl-copy
+fi
+
 if [[ -x "$(which gron 2> /dev/null)" ]]; then
     alias ungron='gron --ungron'
 fi
