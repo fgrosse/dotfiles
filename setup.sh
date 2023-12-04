@@ -8,6 +8,7 @@ type make >/dev/null 2>&1 || { echo >&2 'ERROR: Script requires "make" binary to
 REPO='https://github.com/fgrosse/dotfiles.git'
 CHEZMOI_VERSION='1.4.2'
 CHEZMOI_SHA256_HASH='89276df937a7ce95e6647f285007fceba784a9a94efd12d4cb057f0b99c649cb'
+ASDF_VERSION='v0.13.1'
 
 function print_step {
     MSG="$1"
@@ -62,6 +63,9 @@ make plugins
 
 echo "Installing fzf (a command-line fuzzy finder)"
 ./fzf/install" --bin
+
+echo "Installing asdf (a tool version manager)"
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch "$ASDF_VERSION"
 
 print_step "Dotfiles setup successful"
 echo "Happy hacking! \ʕ◔ϖ◔ʔ/"
