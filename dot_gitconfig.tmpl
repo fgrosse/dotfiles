@@ -32,8 +32,8 @@
     {{- if (index . "signingkey") }}
     signingkey = {{ .signingkey }}
 
-[gpg]
-    program = /usr/bin/gpg2
+[commit]
+    gpgsign = true
 {{- end }}
 
 [init]
