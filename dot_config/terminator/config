@@ -1,23 +1,22 @@
 [global_config]
   window_state = maximise
   borderless = True
-  title_hide_sizetext = True
-  title_transmit_bg_color = "#145b20"
-  title_inactive_bg_color = "#2e3436"
   enabled_plugins = InactivityWatch, ActivityWatch, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
 [keybindings]
 [profiles]
   [[default]]
     background_darkness = 0.9
     background_type = transparent
-    cursor_color = "#aaaaaa"
-    font = Fira Code Medium 12
+    font = FiraCode Nerd Font Medium 12
     scrollbar_position = hidden
     scrollback_infinite = True
     use_system_font = False
+    title_hide_sizetext = True
+    title_transmit_bg_color = "#26a269"
+    title_use_system_font = False
+    title_font = FiraCode Nerd Font Medium 9
   [[outside]]
     background_color = "#ffffff"
-    cursor_color = "#aaaaaa"
     font = Fira Code Medium 12
     foreground_color = "#000000"
     palette = "#fbf1c7:#cc241d:#98971a:#d79921:#458588:#b16286:#689d6a:#7c6f64:#928374:#9d0006:#79740e:#b57614:#076678:#8f3f71:#427b58:#3c3836"
