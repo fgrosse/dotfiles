@@ -8,12 +8,6 @@ export EDITOR=vim
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-# Shell history configuration.
-export HISTFILE=~/.histfile
-export HISTSIZE=1000
-export SAVEHIST=1000
-export DIRSTACKSIZE=8
-
 # Colors for man pages.
 # See: http://nion.modprobe.de/blog/archives/572-less-colors-for-man-pages.html
 export LESS_TERMCAP_mb=$'\E[01;31m'

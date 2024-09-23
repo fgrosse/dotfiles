@@ -57,10 +57,6 @@ chezmoi init --apply "$REPO"
 # The rest of the setup script is executed from within the chezmoi dotfiles directory.
 chezmoi cd
 
-# TODO: we need to make sure antibody is installed first
-echo "Downloading antibody bundles (zsh package manager)"
-make plugins
-
 echo "Installing fzf (a command-line fuzzy finder)"
 ./fzf/install" --bin
 

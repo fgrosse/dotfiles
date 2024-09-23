@@ -1,0 +1,190 @@
+# Prepare direnv hook before enabling Powerlevel 10k instant prompt.
+# There is a second line related to direnv below.
+# See https://github.com/romkatv/powerlevel10k#how-do-i-initialize-direnv-when-using-instant-prompt
+if [[ -x "$(which direnv 2> /dev/null)" ]]; then
+    (( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
+fi
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Enable the direnv hook. 
+# This is the second command related to direnv
+# See https://github.com/romkatv/powerlevel10k#how-do-i-initialize-direnv-when-using-instant-prompt
+if [[ -x "$(which direnv 2> /dev/null)" ]]; then
+    (( ${+commands[direnv]} )) && emulate zsh -c "$(direnv hook zsh)"
+fi
+
+# Set the directory where we want to store zinit and plugins
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+    mkdir -p "$(dirname $ZINIT_HOME)"
+    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+
+# Load Zinit
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Add zsh plugins
+zinit light zsh-users/zsh-syntax-highlighting # syntax highlighting in shell
+zinit light zsh-users/zsh-completions         # many completions for various commands
+zinit light zsh-users/zsh-autosuggestions     # suggest commands based on history
+zinit light Aloxaf/fzf-tab                    # use fzf in auto completions
+zinit light zerok/cdp                         # quick project directory change
+
+# Add in snippets
+zinit snippet OMZP::aws               # completions for awscli v2
+zinit snippet OMZP::kubectl           # completions and aliases for kubectl
+zinit snippet OMZP::command-not-found
+
+# Load my own completions
+fpath+=( "$HOME/.local/share/chezmoi/completions" )
+
+# Load completions
+autoload -U compinit && compinit
+zinit cdreplay -q
+
+# Keybindings
+bindkey -e # Emacs mode (e.g. jump with Ctrl+a or Ctrl+e)
+bindkey '^[[1;5C' forward-word  # jump with Ctrl + →
+bindkey '^[[1;5D' backward-word # jump with Ctrl + ←
+bindkey "^[[3~" delete-char # Make delete key work
+
+# Shell history configuration
+HISTSIZE=5000 # max number of entries in local history file
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase # remove any duplicates
+setopt append_history # append history entries to file instead of overwriting
+setopt share_history # enable sharing history between multiple sessions / windows
+setopt hist_ignore_space # to not add commands to history if they start with a space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+setopt inc_append_history # save each command immediately in the history file
+
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' # make auto completion case-insensitive
+zstyle ':completion:*' menu select # # cycle with <TAB> through options
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no 
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+setopt menu_complete  # complete till first ambigious character
+
+# Warn if regex does not match anything
+setopt nomatch
+
+# Treat parts of an path as different words.
+# Influences the behaviour of e.g. CTRL-W
+autoload -U select-word-style
+select-word-style bash
+
+# no beep...
+unsetopt beep notify
+
+# Aliases
+alias grep='grep --color'
+alias please='sudo'
+alias gpu='git pu'
+alias ts='tig status'
+alias coma='git commit --amend'
+alias ll='ls -l --color -h'
+alias la='ll -a'
+alias kc=kubectl
+alias ka=kafkactl
+alias gpg=gpg2
+
+
+# https://github.com/sharkdp/bat
+if [[ -x "$(which bat 2> /dev/null)" ]]; then
+    alias cat='bat --style=plain'
+fi
+
+if [[ -x "$(which cwtch 2> /dev/null)" ]]; then
+    alias watch=cwtch
+fi
+
+if [[ -x "$(which tldr 2> /dev/null)" ]]; then
+    alias help=tldr
+fi
+
+# https://github.com/bugaevc/wl-clipboard
+if [[ -x "$(which wl-copy 2> /dev/null)" ]]; then
+    alias clipboard=wl-copy
+fi
+
+if [[ -x "$(which gron 2> /dev/null)" ]]; then
+    alias ungron='gron --ungron'
+fi
+
+if [[ -x "$(which prettyping 2> /dev/null)" ]]; then
+    alias ping='prettyping --nolegend'
+fi
+
+if [ -d "$HOME/.krew" ]; then
+    export PATH="$HOME/.krew/bin:$PATH"
+    alias krew='kubectl krew'
+fi
+
+if [ -e "$HOME/.krew/bin/kubectl-ctx" ]; then
+    alias kubectx='kubectl ctx'
+fi
+
+if [ -e "$HOME/.krew/bin/kubectl-ns" ]; then
+    alias kubens='kubectl ns'
+fi
+
+if [ -e "$HOME/.asdf/asdf.sh" ]; then
+    source "$HOME/.asdf/asdf.sh"
+    fpath=(${ASDF_DIR}/completions $fpath)
+fi
+
+# Use fzf if available
+if [ -e "$HOME/.fzf.zsh" ]; then
+    source "$HOME/.fzf.zsh"
+fi
+
+# change dir if input is no executable
+setopt autocd
+
+# use pushd instead of cd
+setopt autopushd
+
+# ignore duplicates in the directory history
+setopt pushdignoredups
+
+# print no message
+setopt pushdsilent
+
+# invert meaning of + and - (highest element in the stack hast highest order)
+setopt pushdminus
+
+# push directories relative to home dir
+setopt pushdtohome
+
+# A function to allow traversing up the file system using multiple dots (e.g. ....)
+cd() {
+  if [[ "$1" =~ ^\\.{1,}$ ]]; then
+    for (( i=0; i<$(( ${#1} - 1 )); i++ )); do
+      builtin cd ..
+    done
+  else
+    builtin cd "$@"
+  fi
+}
+
+# Load powerlevel10k theme
+zinit ice depth"1" # git clone depth
+zinit light romkatv/powerlevel10k
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+#typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet # TODO: understand and fix p10k warning related to direnv
+
