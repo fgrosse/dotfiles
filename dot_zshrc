@@ -48,7 +48,7 @@ export MY_ZSH_COMPLETIONS="$HOME/.local/share/zsh-completions"
 if [ ! -d "$MY_ZSH_COMPLETIONS" ]; then
     mkdir -p "$MY_ZSH_COMPLETIONS"
 fi
-fpath+=( "$HOME/.local/share/chezmoi/completions" )
+fpath+=( "$MY_ZSH_COMPLETIONS" )
 
 # Load completions
 autoload -U compinit && compinit
