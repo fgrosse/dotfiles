@@ -6,8 +6,8 @@ type git >/dev/null 2>&1 || { echo >&2 'ERROR: Script requires "git" binary to f
 type make >/dev/null 2>&1 || { echo >&2 'ERROR: Script requires "make" binary to perform post setup steps.'; exit 1; }
 
 REPO='https://github.com/fgrosse/dotfiles.git'
-CHEZMOI_VERSION='1.4.2'
-CHEZMOI_SHA256_HASH='89276df937a7ce95e6647f285007fceba784a9a94efd12d4cb057f0b99c649cb'
+CHEZMOI_VERSION='2.52.2'
+CHEZMOI_SHA256_HASH='c7dba8b25cd7bd8aa5e0cd0e0892aa1f205589d917a53f952e768f5e7598a4b0'
 ASDF_VERSION='v0.13.1'
 
 function print_step {
