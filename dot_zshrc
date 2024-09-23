@@ -44,6 +44,10 @@ zinit snippet OMZP::kubectl           # completions and aliases for kubectl
 zinit snippet OMZP::command-not-found
 
 # Load my own completions
+export MY_ZSH_COMPLETIONS="$HOME/.local/share/zsh-completions"
+if [ ! -d "$MY_ZSH_COMPLETIONS" ]; then
+    mkdir -p "$MY_ZSH_COMPLETIONS"
+fi
 fpath+=( "$HOME/.local/share/chezmoi/completions" )
 
 # Load completions
@@ -85,6 +89,9 @@ setopt nomatch
 # Influences the behaviour of e.g. CTRL-W
 autoload -U select-word-style
 select-word-style bash
+
+# Enable commenting lines on the shell
+setopt interactivecomments
 
 # no beep...
 unsetopt beep notify
