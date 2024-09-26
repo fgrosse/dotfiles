@@ -36,7 +36,6 @@ zinit light zsh-users/zsh-syntax-highlighting # syntax highlighting in shell
 zinit light zsh-users/zsh-completions         # many completions for various commands
 zinit light zsh-users/zsh-autosuggestions     # suggest commands based on history
 zinit light Aloxaf/fzf-tab                    # use fzf in auto completions
-zinit light zerok/cdp                         # quick project directory change
 
 # Add in snippets
 zinit snippet OMZP::aws               # completions for awscli v2
