@@ -158,33 +158,27 @@ if [ -e "$HOME/.fzf.zsh" ]; then
     source "$HOME/.fzf.zsh"
 fi
 
-# change dir if input is no executable
-setopt autocd
+# https://github.com/ajeetdsouza/zoxide
+if [[ -x "$(which zoxide 2> /dev/null)" ]]; then
+    eval "$(zoxide init zsh --cmd cd)"
+fi
 
-# use pushd instead of cd
-setopt autopushd
-
-# ignore duplicates in the directory history
-setopt pushdignoredups
-
-# print no message
-setopt pushdsilent
-
-# invert meaning of + and - (highest element in the stack hast highest order)
-setopt pushdminus
-
-# push directories relative to home dir
-setopt pushdtohome
+# A helper function used in the cd function below.
+function __my_cd() {
+    if [[ -x "$(which zoxide 2> /dev/null)" ]]; then
+        __zoxide_z "$@"
+    else
+        builtin cd "$@"
+    fi
+}
 
 # A function to allow traversing up the file system using multiple dots (e.g. ....)
-cd() {
-  if [[ "$1" =~ ^\\.{1,}$ ]]; then
-    for (( i=0; i<$(( ${#1} - 1 )); i++ )); do
-      builtin cd ..
-    done
-  else
-    builtin cd "$@"
-  fi
+function cd() {
+    if [[ "$1" =~ ^\\.{1,}$ ]]; then
+        __my_cd "$(printf '../%.0s' {1..$(( ${#1} - 1 ))})"
+    else
+        __my_cd "$@"
+    fi
 }
 
 # Load powerlevel10k theme
