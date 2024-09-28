@@ -43,7 +43,7 @@ zinit snippet OMZP::kubectl           # completions and aliases for kubectl
 zinit snippet OMZP::command-not-found
 
 # Load my own completions
-export MY_ZSH_COMPLETIONS="$HOME/.local/share/zsh-completions"
+export MY_ZSH_COMPLETIONS="$XDG_DATA_HOME/zsh-completions"
 if [ ! -d "$MY_ZSH_COMPLETIONS" ]; then
     mkdir -p "$MY_ZSH_COMPLETIONS"
 fi
