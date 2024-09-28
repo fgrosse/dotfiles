@@ -1,10 +1,10 @@
-FROM ubuntu
+FROM fedora:latest
 
-RUN apt-get update && apt-get install -y git wget vim zsh make
+RUN dnf update -y && dnf install -y git wget vim zsh make
 
+ENV HOST="Test Container"
 WORKDIR /root
 
-ADD setup.sh /root
-RUN chmod u+x /root/setup.sh
-
-CMD /root/setup.sh && chezmoi verify && chezmoi data
+COPY test/example-config.yml /root/.config/chezmoi/chezmoi.yaml
+COPY setup-tools.sh /root
+COPY setup.sh /root

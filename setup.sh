@@ -8,14 +8,13 @@ type make >/dev/null 2>&1 || { echo >&2 'ERROR: Script requires "make" binary to
 REPO='https://github.com/fgrosse/dotfiles.git'
 CHEZMOI_VERSION='2.52.2'
 CHEZMOI_SHA256_HASH='c7dba8b25cd7bd8aa5e0cd0e0892aa1f205589d917a53f952e768f5e7598a4b0'
-ASDF_VERSION='v0.13.1'
 
 function print_step {
     MSG="$1"
     echo -e "\n\e[97m### \e[1m${MSG}\e[0m"
 }
 
-if ! $(type chezmoi >/dev/null 2>&1) ; then
+if [[ ! -x "$(which chezmoi 2> /dev/null)" ]]; then
     type wget >/dev/null 2>&1 || { echo >&2 'ERROR: Script requires "wget" binary to download chezmoi.'; exit 1; }
     type tar >/dev/null 2>&1 || { echo >&2 'ERROR: Script requires "tar" binary to decompress the downloaded archive.'; exit 1; }
     type sha256sum >/dev/null 2>&1 || { echo >&2 'ERROR: Script requires "sha256sum" binary to validate the checksum of the decompressed binary.'; exit 1; }
@@ -24,9 +23,9 @@ if ! $(type chezmoi >/dev/null 2>&1) ; then
     CHEZMOI_TAR_FILE="chezmoi_${CHEZMOI_VERSION}_linux_amd64.tar.gz"
     CHEZMOI_DOWNLOAD_URL="https://github.com/twpayne/chezmoi/releases/download/v$CHEZMOI_VERSION/$CHEZMOI_TAR_FILE"
 
-    print_step "Did not find "chezmoi" binary in \$PATH. Downloading from GitHub..."
+    print_step "Did not find \"chezmoi\" binary in \$PATH. Downloading from GitHub..."
     echo "URL: $CHEZMOI_DOWNLOAD_URL"
-    wget --quiet --show-progress "$CHEZMOI_DOWNLOAD_URL"
+    wget "$CHEZMOI_DOWNLOAD_URL"
 
     print_step "Decompressing archive and validating checksum ..."
     echo "Expected: $CHEZMOI_SHA256_HASH"
@@ -54,15 +53,8 @@ print_step "# Initializing dotfiles from $REPO"
 echo "chezmoi init --apply \"$REPO\""
 chezmoi init --apply "$REPO"
 
-# The rest of the setup script is executed from within the chezmoi dotfiles directory.
-chezmoi cd
-
-echo "Installing fzf (a command-line fuzzy finder)"
-./fzf/install" --bin
-
-echo "Installing asdf (a tool version manager)"
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch "$ASDF_VERSION"
-
-print_step "Dotfiles setup successful"
+print_step "Dotfiles setup successful."
+echo "You may install additional tools via setup-tools.sh"
+echo "Please restart your shell to apply the new settings."
 echo "Happy hacking! \ʕ◔ϖ◔ʔ/"
 echo
