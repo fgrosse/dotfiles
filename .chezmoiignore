@@ -1,9 +1,7 @@
-completions
-fzf
-Makefile
-README.md
-TODO.md
-setup.sh
+fonts
+gnome-shell-extensions
 test
-theme
-zsh_plugins.txt
+README.md
+Makefile
+setup.sh
+setup-tools.sh

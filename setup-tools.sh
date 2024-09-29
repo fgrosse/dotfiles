@@ -71,11 +71,11 @@ install_go() {
 
     start_group ">> Removing previous Go installation ..."
     echo "   Path: $GO_TARGET"
-    rm -rf /usr/local/go
+    sudo rm -rf /usr/local/go
     end_group
 
     start_group ">> Decompressing archive ..."
-    tar -C "$(dirname $GO_TARGET)" -xzf "$GO_TAR_FILE"
+    sudo tar -C "$(dirname $GO_TARGET)" -xzf "$GO_TAR_FILE"
     end_group
 
     start_group ">> Cleaning up downloaded files ..."
@@ -104,3 +104,10 @@ if [[ ! -d ~/.asdf ]]; then
     echo "Installing asdf (a tool version manager)"
     git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch "$ASDF_VERSION"
 fi
+
+for file in ./gnome-shell-extensions/*.dconf; do
+    name=$(basename "$file" .dconf)
+    start_group "Restoring shell extension settings for $name"
+    dconf load -f "/org/gnome/shell/extensions/$name/" < "$file"
+    end_group
+done
