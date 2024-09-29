@@ -5,27 +5,28 @@ set -e -o pipefail
 # This script will install my favorite tools. It is meant to use on
 # primary workstations but not necessarily on a server.
 
-GO_VERSION=1.23.1
+GO_VERSION='1.23.1'
 GO_SHA256_HASH='49bbb517cfa9eee677e1e7897f7cf9cfdbcf49e05f61984a2789136de359f9bd'
 
 ASDF_VERSION='v0.13.1'
 
 DNF_PACKAGES=(
-    bat
-    direnv
-    fzf
-    gron
-    httpie
-    prettyping
-    tldr
-    util-linux
-    wget
-    which
-    zoxide
+    'bat'
+    'direnv'
+    'fzf'
+    'gron'
+    'httpie'
+    'prettyping'
+    'tldr'
+    'util-linux'
+    'wget'
+    'which'
+    'zoxide'
+    'gh'
 )
 
 GO_TOOLS=(
-    github.com/fraugster/cwtch@latest
+    'github.com/fraugster/cwtch@latest'
 )
 
 start_group() {

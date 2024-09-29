@@ -1,7 +1,20 @@
+# We are using a couple of shims to integrate zinit, fzf and use non-constant sources for that
+# shellcheck disable=SC1090
+
+# This file is interpreted by zsh, so we can use zsh specific syntax here.
+# shellcheck disable=SC2051,SC2296
+
+# is_installed checks if a given binary can be found in the PATH and is executable.
+# It accepts one argument, the name of the binary to check and returns 0 if the binary
+# is found, 1 otherwise.
+function is_installed() {
+    command -v "$1" &> /dev/null
+}
+
 # Prepare direnv hook before enabling Powerlevel 10k instant prompt.
 # There is a second line related to direnv below.
 # See https://github.com/romkatv/powerlevel10k#how-do-i-initialize-direnv-when-using-instant-prompt
-if [[ -x "$(which direnv 2> /dev/null)" ]]; then
+if is_installed "direnv"; then
     (( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
 fi
 
@@ -15,7 +28,7 @@ fi
 # Enable the direnv hook. 
 # This is the second command related to direnv
 # See https://github.com/romkatv/powerlevel10k#how-do-i-initialize-direnv-when-using-instant-prompt
-if [[ -x "$(which direnv 2> /dev/null)" ]]; then
+if is_installed "direnv"; then
     (( ${+commands[direnv]} )) && emulate zsh -c "$(direnv hook zsh)"
 fi
 
@@ -24,7 +37,7 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
 # Download Zinit, if it's not there yet
 if [ ! -d "$ZINIT_HOME" ]; then
-    mkdir -p "$(dirname $ZINIT_HOME)"
+    mkdir -p "$(dirname "$ZINIT_HOME")"
     git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
@@ -60,10 +73,10 @@ bindkey '^[[1;5D' backward-word # jump with Ctrl + ←
 bindkey "^[[3~" delete-char # Make delete key work
 
 # Shell history configuration
-HISTSIZE=5000 # max number of entries in local history file
-HISTFILE=~/.zsh_history
-SAVEHIST=$HISTSIZE
-HISTDUP=erase # remove any duplicates
+export HISTSIZE=5000 # max number of entries in local history file
+export HISTFILE=~/.zsh_history
+export SAVEHIST=$HISTSIZE
+export HISTDUP=erase # remove any duplicates
 setopt append_history # append history entries to file instead of overwriting
 setopt share_history # enable sharing history between multiple sessions / windows
 setopt hist_ignore_space # to not add commands to history if they start with a space
@@ -74,15 +87,20 @@ setopt hist_find_no_dups
 setopt inc_append_history # save each command immediately in the history file
 
 # Completion styling
+setopt menu_complete  # complete till first ambiguous character
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' # make auto completion case-insensitive
 zstyle ':completion:*' menu select # # cycle with <TAB> through options
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu no 
+zstyle ':completion:*' menu no
+
+# The $realpath variable in the argument to fzf-preview should not be expanded
+# shellcheck disable=SC2016
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-setopt menu_complete  # complete till first ambigious character
 
 # Warn if regex does not match anything
 setopt nomatch
+
+# automatically remove duplicates from the following array(s)
+typeset -U fpath
 
 # Treat parts of an path as different words.
 # Influences the behaviour of e.g. CTRL-W
@@ -109,28 +127,28 @@ alias gpg=gpg2
 
 
 # https://github.com/sharkdp/bat
-if [[ -x "$(which bat 2> /dev/null)" ]]; then
+if is_installed "bat"; then
     alias cat='bat --style=plain'
 fi
 
-if [[ -x "$(which cwtch 2> /dev/null)" ]]; then
+if is_installed "cwtch"; then
     alias watch=cwtch
 fi
 
-if [[ -x "$(which tldr 2> /dev/null)" ]]; then
+if is_installed "tldr"; then
     alias help=tldr
 fi
 
 # https://github.com/bugaevc/wl-clipboard
-if [[ -x "$(which wl-copy 2> /dev/null)" ]]; then
+if is_installed "wl-copy"; then
     alias clipboard=wl-copy
 fi
 
-if [[ -x "$(which gron 2> /dev/null)" ]]; then
+if is_installed "gron"; then
     alias ungron='gron --ungron'
 fi
 
-if [[ -x "$(which prettyping 2> /dev/null)" ]]; then
+if is_installed "prettyping"; then
     alias ping='prettyping --nolegend'
 fi
 
@@ -149,22 +167,23 @@ fi
 
 if [ -e "$HOME/.asdf/asdf.sh" ]; then
     source "$HOME/.asdf/asdf.sh"
-    fpath=(${ASDF_DIR}/completions $fpath)
+    fpath+=( "${ASDF_DIR}/completions" )
 fi
 
-# Use fzf if available
-if [ -e "$HOME/.fzf.zsh" ]; then
-    source "$HOME/.fzf.zsh"
+# Set up fzf key bindings and fuzzy completion
+if is_installed "fzf"; then
+    source <(fzf --zsh)
 fi
 
 # https://github.com/ajeetdsouza/zoxide
-if [[ -x "$(which zoxide 2> /dev/null)" ]]; then
+if is_installed "zoxide"; then
     eval "$(zoxide init zsh --cmd cd)"
 fi
 
 # A helper function used in the cd function below.
 function __my_cd() {
-    if [[ -x "$(which zoxide 2> /dev/null)" ]]; then
+    # shellcheck disable=SC2164
+    if is_installed "zoxide"; then
         __zoxide_z "$@"
     else
         builtin cd "$@"
@@ -180,11 +199,11 @@ function cd() {
     fi
 }
 
-# Load powerlevel10k theme
+# Load Powerlevel10k theme
+# https://github.com/romkatv/powerlevel10k
 zinit ice depth"1" # git clone depth
 zinit light romkatv/powerlevel10k
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-#typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet # TODO: understand and fix p10k warning related to direnv
 
