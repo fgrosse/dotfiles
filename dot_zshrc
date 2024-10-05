@@ -180,6 +180,11 @@ if is_installed "zoxide"; then
     eval "$(zoxide init zsh --cmd cd)"
 fi
 
+# Add Go to PATH if it is installed.
+if [[ -d "/usr/local/go" ]]; then
+    export PATH=/usr/local/go/bin:$PATH
+fi
+
 # A helper function used in the cd function below.
 function __my_cd() {
     # shellcheck disable=SC2164
