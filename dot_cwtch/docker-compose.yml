@@ -1,0 +1,15 @@
+cmd_regex: docker compose
+highlights:
+- regex: NAME|IMAGE|COMMAND|SERVICE|CREATED|STATUS|PORTS
+  fg: underline, bold
+
+- regex: 'healthy'
+  fg: green
+
+- regex: 'health: starting'
+  fg: yellow
+
+- regex: 'unhealthy'
+  fg: red
+
+  
