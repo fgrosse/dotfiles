@@ -152,19 +152,6 @@ if is_installed "prettyping"; then
     alias ping='prettyping --nolegend'
 fi
 
-if [ -d "$HOME/.krew" ]; then
-    export PATH="$HOME/.krew/bin:$PATH"
-    alias krew='kubectl krew'
-fi
-
-if [ -e "$HOME/.krew/bin/kubectl-ctx" ]; then
-    alias kubectx='kubectl ctx'
-fi
-
-if [ -e "$HOME/.krew/bin/kubectl-ns" ]; then
-    alias kubens='kubectl ns'
-fi
-
 if [ -e "$HOME/.asdf/asdf.sh" ]; then
     source "$HOME/.asdf/asdf.sh"
     fpath+=( "${ASDF_DIR}/completions" )
