@@ -175,8 +175,9 @@ fi
 # Add pyenv to PATH if it is installed.
 # See https://github.com/pyenv/pyenv
 if [[ -d "$HOME/.pyenv" ]]; then
-    export PATH="$HOME/.pyenv/bin:$PATH"
-    eval "$(pyenv init zsh)"
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init - zsh)"
 fi
 
 # A helper function used in the cd function below.
