@@ -101,7 +101,7 @@
   typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=false
   typeset -g POWERLEVEL9K_VIRTUALENV_{LEFT,RIGHT}_DELIMITER=
 
-  typeset -g POWERLEVEL9K_DIR_FOREGROUND=$green
+  typeset -g POWERLEVEL9K_DIR_FOREGROUND=$yellow
   typeset -g POWERLEVEL9K_DIR_CONTENT_EXPANSION='%B$P9K_CONTENT' # Bold directory
 
   # Context format when root: user@host
@@ -109,7 +109,7 @@
   # Context format when not root: only host
   typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE="%B%F{$yellow}%m%f%b"
   # Don't show context unless root or in SSH.
-  #typeset -g POWERLEVEL9K_CONTEXT_{DEFAULT,SUDO}_CONTENT_EXPANSION=
+  typeset -g POWERLEVEL9K_CONTEXT_{DEFAULT,SUDO}_CONTENT_EXPANSION=
 
   # Show previous command duration only if it's >= 5s.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=5
