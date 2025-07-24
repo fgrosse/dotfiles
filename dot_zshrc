@@ -139,6 +139,10 @@ if is_installed "tldr"; then
     alias help=tldr
 fi
 
+if is_installed "brew"; then
+    eval "$(brew shellenv)"
+fi
+
 # https://github.com/bugaevc/wl-clipboard
 if is_installed "wl-copy"; then
     alias clipboard=wl-copy
