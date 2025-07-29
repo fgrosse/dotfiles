@@ -39,6 +39,11 @@
     gpgSign = true
 {{- end }}
 
+{{ if eq .chezmoi.os "darwin" -}}
+[credential]
+    helper = osxkeychain
+{{- end }}
+
 [init]
     defaultBranch = main
 
