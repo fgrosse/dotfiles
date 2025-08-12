@@ -123,6 +123,8 @@ fc-cache -f
 fc-list | grep FiraCodeNerdFont
 end_group
 
-start_group "Install vundle (plugin manager for vim)"
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-end_group
+if [[ ! -d ~/.vim/bundle/Vundle.vim ]]; then
+    start_group "Install vundle (plugin manager for vim)"
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    end_group
+fi
