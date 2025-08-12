@@ -14,16 +14,18 @@ DNF_PACKAGES=(
     'bat'
     'direnv'
     'fzf'
+    'git'
+    'gh'
     'gron'
     'httpie'
     'prettyping'
     'tig'
     'tldr'
     'util-linux'
+    'vim'
     'wget'
     'which'
     'zoxide'
-    'gh'
 )
 
 GO_TOOLS=(
@@ -102,8 +104,9 @@ for tool in "${GO_TOOLS[@]}"; do
 done
 
 if [[ ! -d ~/.asdf ]]; then
-    echo "Installing asdf (a tool version manager)"
+    start_group "Installing asdf (a tool version manager)"
     git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch "$ASDF_VERSION"
+    end_group
 fi
 
 for file in ./gnome-shell-extensions/*.dconf; do
@@ -117,5 +120,9 @@ done
 # The installation itself is managed via chezmoi
 start_group "Ensuring fonts are installed"
 fc-cache -f
-fc-list | grep --silent FiraCodeNerdFont
+fc-list | grep FiraCodeNerdFont
+end_group
+
+start_group "Install vundle (plugin manager for vim)"
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 end_group
