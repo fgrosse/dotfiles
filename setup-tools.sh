@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+shopt -s nullglob
+shopt -s extglob
+
 set -e -o pipefail
 
 # This script will install my favorite tools. It is meant to use on
@@ -13,6 +16,7 @@ ASDF_VERSION='v0.13.1'
 DNF_PACKAGES=(
     'bat'
     'direnv'
+    'fontconfig'
     'fzf'
     'git'
     'gh'

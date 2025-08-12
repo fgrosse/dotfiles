@@ -23,7 +23,7 @@ setup-tools: # Setup packages and tools
 	./setup-tools.sh
 
 test: test-docker-image # Run tests using Docker
-	docker run -it --rm $(TEST_IMAGE_NAME) zsh -c "./setup-tools.sh && ./setup.sh; chezmoi verify && zsh"
+	docker run -it --rm $(TEST_IMAGE_NAME) zsh -c "./setup.sh && ./setup-tools.sh && chezmoi verify && zsh"
 
 debug: test-docker-image # Start a shell in the test Docker image
 	docker run -it --rm $(TEST_IMAGE_NAME) zsh
