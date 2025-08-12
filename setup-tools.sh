@@ -17,6 +17,7 @@ DNF_PACKAGES=(
     'gron'
     'httpie'
     'prettyping'
+    'tig'
     'tldr'
     'util-linux'
     'wget'
@@ -111,3 +112,10 @@ for file in ./gnome-shell-extensions/*.dconf; do
     dconf load -f "/org/gnome/shell/extensions/$name/" < "$file"
     end_group
 done
+
+# Make sure fonts are installed correctly
+# The installation itself is managed via chezmoi
+start_group "Ensuring fonts are installed"
+fc-cache -f
+fc-list | grep --silent FiraCodeNerdFont
+end_group
