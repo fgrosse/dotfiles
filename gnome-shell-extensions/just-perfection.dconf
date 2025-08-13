@@ -8,5 +8,7 @@ panel-notification-icon=true
 power-icon=true
 quick-settings-dark-mode=false
 search=false
+support-notifier-showed-version=34
+support-notifier-type=0
 weather=false
 window-picker-icon=true

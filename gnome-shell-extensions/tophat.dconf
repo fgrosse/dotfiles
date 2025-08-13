@@ -1,0 +1,6 @@
+[/]
+cpu-show-cores=true
+mount-to-monitor='/'
+position-in-panel='leftedge'
+show-disk=false
+show-net=false

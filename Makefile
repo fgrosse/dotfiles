@@ -35,4 +35,4 @@ git-set-url: # Set the git remote url to the SSH version
 	git remote set-url origin git@github.com:fgrosse/dotfiles.git
 
 save-shell-settings: # Save Gnome shell extension settings to file
-	dconf dump '/org/gnome/shell/extensions/just-perfection/' > gnome-shell-extension/just-perfection.conf
+	for e in $$(dconf list /org/gnome/shell/extensions/); do; name=$$(basename "$$e"); dconf dump "/org/gnome/shell/extensions/$$name/" > "gnome-shell-extensions/$$name.dconf"; done
