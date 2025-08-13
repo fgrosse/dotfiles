@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e -o pipefail
+{{ range glob (joinPath .chezmoi.workingTree "gnome-shell-extensions/*") }}
+{{- $name := base . | trimSuffix (ext .) }}
+# {{ $name }} hash: {{ include . | sha256sum }}
+dconf load -f "/org/gnome/shell/extensions/{{ $name}}/" < {{ . }}
+{{ end }}

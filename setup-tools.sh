@@ -113,13 +113,6 @@ if [[ ! -d ~/.asdf ]]; then
     end_group
 fi
 
-for file in ./gnome-shell-extensions/*.dconf; do
-    name=$(basename "$file" .dconf)
-    start_group "Restoring shell extension settings for $name"
-    dconf load -f "/org/gnome/shell/extensions/$name/" < "$file"
-    end_group
-done
-
 # Make sure fonts are installed correctly
 # The installation itself is managed via chezmoi
 start_group "Ensuring fonts are installed"
