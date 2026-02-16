@@ -166,7 +166,8 @@ if is_installed "fzf"; then
 fi
 
 # https://github.com/ajeetdsouza/zoxide
-if is_installed "zoxide"; then
+# Only initialize in interactive shells to avoid interfering with automation tools
+if is_installed "zoxide" && [[ -o interactive ]]; then
     eval "$(zoxide init zsh --cmd cd)"
 fi
 
@@ -194,13 +195,16 @@ function __my_cd() {
 }
 
 # A function to allow traversing up the file system using multiple dots (e.g. ....)
-function cd() {
-    if [[ "$1" =~ ^\\.{1,}$ ]]; then
-        __my_cd "$(printf '../%.0s' {1..$(( ${#1} - 1 ))})"
-    else
-        __my_cd "$@"
-    fi
-}
+# Only use custom cd in interactive shells to avoid interfering with automation tools
+if [[ -o interactive ]]; then
+    function cd() {
+        if [[ "$1" =~ ^\\.{1,}$ ]]; then
+            __my_cd "$(printf '../%.0s' {1..$(( ${#1} - 1 ))})"
+        else
+            __my_cd "$@"
+        fi
+    }
+fi
 
 # Load Powerlevel10k theme
 # https://github.com/romkatv/powerlevel10k
@@ -209,4 +213,5 @@ zinit light romkatv/powerlevel10k
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 
