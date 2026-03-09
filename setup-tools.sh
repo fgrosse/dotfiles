@@ -8,8 +8,8 @@ set -e -o pipefail
 # This script will install my favorite tools. It is meant to use on
 # primary workstations but not necessarily on a server.
 
-GO_VERSION='1.24.6'
-GO_SHA256_HASH='bbca37cc395c974ffa4893ee35819ad23ebb27426df87af92e93a9ec66ef8712'
+GO_VERSION='1.26.0'
+GO_SHA256_HASH='c9132a8a1f6bd2aa4aad1d74b8231d95274950483a4950657ee6c56e6e817790'
 
 ASDF_VERSION='v0.13.1'
 
@@ -52,7 +52,7 @@ sudo dnf -y update
 end_group
 
 start_group "Installing packages"
-sudo dnf -y install "${DNF_PACKAGES[@]}"
+sudo dnf -y install --skip-unavailable "${DNF_PACKAGES[@]}"
 end_group
 
 # Install zsh and make it the standard shell
