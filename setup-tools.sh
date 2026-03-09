@@ -8,8 +8,8 @@ set -e -o pipefail
 # This script will install my favorite tools. It is meant to use on
 # primary workstations but not necessarily on a server.
 
-GO_VERSION='1.26.0'
-GO_SHA256_HASH='c9132a8a1f6bd2aa4aad1d74b8231d95274950483a4950657ee6c56e6e817790'
+GO_VERSION='1.26.1'
+GO_SHA256_HASH='031f088e5d955bab8657ede27ad4e3bc5b7c1ba281f05f245bcc304f327c987a'
 
 ASDF_VERSION='v0.13.1'
 
