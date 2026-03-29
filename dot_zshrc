@@ -184,6 +184,11 @@ if [[ -d "$HOME/.pyenv" ]]; then
     eval "$(pyenv init - zsh)"
 fi
 
+# https://mise.jdx.dev/getting-started.html
+if is_installed "mise"; then
+    eval "$(mise activate zsh)"
+fi
+
 # A helper function used in the cd function below.
 function __my_cd() {
     # shellcheck disable=SC2164
