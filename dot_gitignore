@@ -71,3 +71,10 @@ __pycache__
 
 # vim: foldmethod=marker
 
+local_notes.md
+
+# Jujutsu
+.jj
+
+# Claude Code
+.claude/settings.local.json
