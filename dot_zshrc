@@ -11,6 +11,25 @@ function is_installed() {
     command -v "$1" &> /dev/null
 }
 
+# PATH modifications must come before any is_installed checks so that tools
+# installed in these locations are found on the first login shell.
+
+# Common additions to PATH
+export PATH="$HOME/.local/bin:$PATH"
+
+# Add Go to PATH if it is installed.
+if [[ -d "/usr/local/go" ]]; then
+    export PATH="/usr/local/go/bin:$PATH"
+fi
+
+# Add pyenv to PATH if it is installed.
+# See https://github.com/pyenv/pyenv
+if [[ -d "$HOME/.pyenv" ]]; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init - zsh)"
+fi
+
 # Prepare direnv hook before enabling Powerlevel 10k instant prompt.
 # There is a second line related to direnv below.
 # See https://github.com/romkatv/powerlevel10k#how-do-i-initialize-direnv-when-using-instant-prompt
@@ -169,19 +188,6 @@ fi
 # Only initialize in interactive shells to avoid interfering with automation tools
 if is_installed "zoxide" && [[ -o interactive ]]; then
     eval "$(zoxide init zsh --cmd cd)"
-fi
-
-# Add Go to PATH if it is installed.
-if [[ -d "/usr/local/go" ]]; then
-    export PATH=/usr/local/go/bin:$PATH
-fi
-
-# Add pyenv to PATH if it is installed.
-# See https://github.com/pyenv/pyenv
-if [[ -d "$HOME/.pyenv" ]]; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init - zsh)"
 fi
 
 # https://mise.jdx.dev/getting-started.html
