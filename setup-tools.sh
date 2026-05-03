@@ -44,7 +44,7 @@ sudo dnf -y update
 end_group
 
 start_group "Installing packages"
-dnf copr enable jdxcode/mise
+sudo dnf copr enable jdxcode/mise
 sudo dnf -y install --skip-unavailable "${DNF_PACKAGES[@]}"
 end_group
 
