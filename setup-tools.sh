@@ -18,6 +18,7 @@ DNF_PACKAGES=(
     'gh'
     'gron'
     'httpie'
+    'mise'
     'prettyping'
     'restic'
     'tig'
@@ -55,10 +56,6 @@ if ! command -v zsh &>/dev/null; then
 fi
 
 start_group "Installing global dev tools using mise"
-if ! command -v mise &>/dev/null; then
-    ./bin/mise install
-fi
-
 mise use --global go
 mise use --global go:github.com/fraugster/cwtch
 end_group
