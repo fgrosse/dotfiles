@@ -51,6 +51,18 @@ if is_installed "direnv"; then
     (( ${+commands[direnv]} )) && emulate zsh -c "$(direnv hook zsh)"
 fi
 
+# eza is a modern ls
+# See https://eza.rocks/
+if is_installed "eza"; then
+    alias ls='eza -l --group-directories-first --icons=auto'
+fi
+
+# try - fresh directories for every vibe
+# See https://github.com/tobi/try
+if is_installed "try"; then
+    eval "$(try init)"
+fi
+
 # Set the directory where we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
