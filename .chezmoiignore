@@ -5,3 +5,9 @@ README.md
 Makefile
 setup.sh
 setup-tools.sh
+# Symlink managed by Omarchy for live theme switching, not a real dotfile
+.config/nvim/lua/plugins/theme.lua
+
+# LazyVim starter template boilerplate, not actual config
+.config/nvim/LICENSE
+.config/nvim/README.md
