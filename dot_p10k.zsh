@@ -82,6 +82,10 @@
   # in Pure that makes prompt drift down whenever you use the Alt-C binding from fzf or similar.
   typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 
+  # Emit OSC 133 prompt marks so Ghostty can redraw the prompt cleanly on resize (e.g. splits).
+  # Ghostty's own shell integration can't add them because p10k keeps its precmd hook last.
+  typeset -g POWERLEVEL9K_TERM_SHELL_INTEGRATION=true
+
   # Magenta prompt symbol if the last command succeeded.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS}_FOREGROUND=$magenta
   # Red prompt symbol if the last command failed.
