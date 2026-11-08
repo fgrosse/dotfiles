@@ -11,6 +11,9 @@ window-theme = ghostty
 window-padding-x = 14
 window-padding-y = 14
 confirm-close-surface=false
+
+# Copy selected text to both the system clipboard and the primary selection
+copy-on-select = both
 resize-overlay = never
 gtk-toolbar-style = flat
 
@@ -27,8 +30,8 @@ keybind = shift+insert=paste_from_clipboard
 keybind = control+insert=copy_to_clipboard
 # Send Shift+Enter as CSI-u so TUIs can distinguish it from Enter.
 keybind = shift+enter=csi:13;2u
-# Legacy encoding sends Alt+Shift+Enter the same as Alt+Enter; send CSI-u so tmux can match M-S-Enter.
-keybind = alt+shift+enter=csi:13;4u
+# Toggle zoom of the current split pane (matches macOS habit; Ctrl+Shift+Enter also works)
+keybind = alt+shift+enter=toggle_split_zoom
 keybind = super+control+shift+alt+arrow_down=resize_split:down,100
 keybind = super+control+shift+alt+arrow_up=resize_split:up,100
 keybind = super+control+shift+alt+arrow_left=resize_split:left,100
