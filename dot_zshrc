@@ -240,4 +240,16 @@ zinit light romkatv/powerlevel10k
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Undo terminal modes a crashed/disconnected TUI (e.g. ssh -> claude) may have left on:
+# mouse tracking, focus reporting, kitty keyboard protocol, hidden cursor.
+# Skips the first prompt: nothing can be broken yet, and output there trips p10k's instant prompt warning.
+_reset_terminal_modes() {
+  if (( ! ${+_reset_terminal_modes_armed} )); then
+    typeset -g _reset_terminal_modes_armed=1
+    return
+  fi
+  printf '\e[?1000l\e[?1002l\e[?1003l\e[?1005l\e[?1006l\e[?1015l\e[?1004l\e[=0;1u\e[?25h'
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _reset_terminal_modes
 
