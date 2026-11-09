@@ -181,6 +181,11 @@ if is_installed "wl-copy"; then
     alias clipboard=wl-copy
 fi
 
+# Open files with their default application, like open on macOS
+if is_installed "xdg-open"; then
+    alias open=xdg-open
+fi
+
 if is_installed "gron"; then
     alias ungron='gron --ungron'
 fi
